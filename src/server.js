@@ -8,6 +8,6 @@ const webhookRoutes = require('./routes/webhook');
 
 app.use('/webhook', webhookRoutes);
 
-app.listen(3001, () => {
-    console.log('Webhook service rodando na porta 3001');
+app.listen(3000, () => {
+    console.log('Webhook service rodando na porta 3000');
 });

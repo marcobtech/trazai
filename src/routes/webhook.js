@@ -7,6 +7,7 @@ router.post('/mercadopago', async (req, res) => {
     try {
 
         const { data } = req.body;
+        console.log('Recebido webhook do Mercado Pago:', data);
 
         if (!data?.id) {
             return res.sendStatus(200);
@@ -28,8 +29,10 @@ router.post('/mercadopago', async (req, res) => {
         const payment = await mpResponse.json();
 
         if (payment.status !== 'approved') {
+            console.log(`Pagamento ${paymentId} não aprovado. Status: ${payment.status}`);
             return res.sendStatus(200);
         }
+        console.log(`Pagamento ${paymentId} aprovado. Atualizando status...`);
 
         // atualiza payment no banco
         await db.query(
